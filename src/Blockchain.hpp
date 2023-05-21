@@ -19,6 +19,8 @@ public:
     void editBlock(Block<T>* block);
     void loadFromFile(std::string filename);
     void saveToFile(std::string filename);
+    void createBlock();
+    void clear();
 };
 
 //--------------------------------------------------------------
@@ -41,6 +43,13 @@ Blockchain<T>::~Blockchain() {
 template <typename T>
 void Blockchain<T>::addBlock(Block<T>* block) {
 
+
+
+
+
+
+
+
     ++blocks;
 }
 
@@ -51,7 +60,49 @@ void Blockchain<T>::saveToFile(std::string filename) {
 
 template <typename T>
 void Blockchain<T>::loadFromFile(std::string filename) {
+    constexpr std::string BASE_DIR = "../data/";
+    constexpr int LINES_LIMIT = 10;
+
+    std::string csvFilePath = BASE_DIR + filename; 
+    std::ifstream file(csvFilePath);
+
+    if (!file) {
+        throw "Error opening file.";
+    }
+
+    std::string line;
+    int currentLine = 1;
+    while (std::getline(file, line) && i < limitLine) {
+        std::istringstream iss(line);
+        std::string sender, recipient, date;
+        double amout;
+        
+        std::getline(iss, sender, ',');
+        std::getline(iss, recipient, ',');
+        std::getline(iss, amout, ',');
+        std::getline(iss, date);
+
+        T transaction(sender, recipient, std::stod(amout), date);
+        ++currentLine;
+        data.push_back(transaction);
+    }
+
+    file.close();
+
    
+}
+template <typename T>
+void Blockchain<T>::createBlock() {
+    // Esperar el tiempo especificado
+    std::this_thread::sleep_for(duration);
+
+    // Crear un nuevo bloque y realizar las operaciones necesarias
+    Block<T>* newBlock = new Block<T>();
+    // Agregar el bloque a la cadena de bloques
+    addBlock(newBlock);
+
+    // Realizar otras acciones después de la creación del bloque, si es necesario
+
 }
 
 template <typename T>
@@ -59,3 +110,7 @@ size_t Blockchain<T>::getNumBlocks() const {
     return blocks;
 }
 
+template <typename T>
+void Blockchain<T>::clear() {
+
+}

@@ -1,1 +1,2 @@
 * agregar las herencias
+* se considera 100 transacciones por bloque
