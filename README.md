@@ -19,5 +19,7 @@ Blockchain es una tecnología que ha impulsado el comercio de criptomonedas debi
 ### Explicación de cada una de las estructuras de datos
 ### Análisis de la complejidad 
 ### Conclusiones
+- El uso de estructuras de datos en la implementación de la Blockchain permite el óptimo performance de la aplicación bancaria.
+- Estructuras de indexación permiten el acceso rápido y eficiente a los datos de la Blockchain.
 ### Referencias bibliográficas
 - Beneficios de blockchain - IBM Blockchain | IBM. (n.d.). https://www.ibm.com/mx-es/topics/benefits-of-blockchain#:~:text=Blockchain%20aumenta%20la%20confianza%2C%20la,gracias%20a%20sus%20nuevas%20eficiencias.&text=Blockchain%20para%20empresas%20utiliza%20un,acceder%20los%20miembros%20con%20permiso.
