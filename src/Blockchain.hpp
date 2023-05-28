@@ -1,6 +1,9 @@
+
 #pragma once
 
 #include <fstream>
+#include <sstream>
+#include <chrono>
 #include "Block.hpp"
 
 template <typename T>
@@ -60,8 +63,8 @@ void Blockchain<T>::saveToFile(std::string filename) {
 
 template <typename T>
 void Blockchain<T>::loadFromFile(std::string filename) {
-    constexpr std::string BASE_DIR = "../data/";
-    constexpr int LINES_LIMIT = 10;
+    const std::string BASE_DIR = "../data/";
+    const int LINES_LIMIT = 10;
 
     std::string csvFilePath = BASE_DIR + filename; 
     std::ifstream file(csvFilePath);
@@ -70,19 +73,20 @@ void Blockchain<T>::loadFromFile(std::string filename) {
         throw "Error opening file.";
     }
 
-    std::string line;
+    createBlock();
+
+    std::string line{};
     int currentLine = 1;
-    while (std::getline(file, line) && i < limitLine) {
+    while (std::getline(file, line) && currentLine < LINES_LIMIT) {
         std::istringstream iss(line);
-        std::string sender, recipient, date;
-        double amout;
+        std::string sender, recipient, date, amout_str;
         
         std::getline(iss, sender, ',');
         std::getline(iss, recipient, ',');
-        std::getline(iss, amout, ',');
+        std::getline(iss, amout_str, ',');
         std::getline(iss, date);
 
-        T transaction(sender, recipient, std::stod(amout), date);
+        T transaction(sender, recipient, std::stod(amout_str), date);
         ++currentLine;
         data.push_back(transaction);
     }
